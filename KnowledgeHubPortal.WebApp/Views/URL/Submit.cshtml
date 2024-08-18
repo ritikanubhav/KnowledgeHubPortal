@@ -1,0 +1,50 @@
+﻿@model KnowledgeHubPortal.Domain.Entities.Article
+
+<div class="container mt-3">
+    <h2 class="mb-3">Submit New Article</h2>
+    <form asp-action="Save" asp-controller="URL" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        @* @Html.ValidationSummary() *@
+        <div class="form-group mt-3">
+            <label for="title">Title</label>
+            <input type="text" class="form-control mt-3" id="title" asp-for="Title" placeholder="Enter Title name">
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-3">
+            <label for="Description">Description</label>
+            <textarea class="form-control mt-3" id="Description" rows="3" asp-for="Description" placeholder="Enter description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-3">
+            <label for="url">URL</label>
+            <input type="text" class="form-control mt-3" id="url" asp-for="URL" placeholder="Enter URL">
+            <span asp-validation-for="URL" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="categorySelect" class="form-label">Category</label>
+                    <select asp-for="CategoryId" class="form-control" id="categorySelect">
+                        <option selected disabled>Select a category</option>
+                        @foreach (var cat in ViewBag.Categories)
+                        {
+                            <option value="@cat.CategoryId">@cat.CategoryName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+</div>
+
+@* add scripts in the script section on end of file *@
+@section Scripts
+{
+    @* Include these files from lib folder in the same order *@
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@ @* already in layout *@
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

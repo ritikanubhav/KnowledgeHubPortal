@@ -1,0 +1,73 @@
+﻿@{
+	var Categories = ViewBag.Categories as List<KnowledgeHubPortal.Domain.Entities.Category>;
+	var Articles = ViewBag.Articles as List<KnowledgeHubPortal.Domain.Entities.Article>;
+}
+
+<div class="form-group mt-3 ">
+	<div class="row">
+		<div class="col-md-6">
+			<label for="categorySelect" class="form-label">Category</label>
+			<select class="form-control" id="categorySelect" onchange="handleCategoryChange()">
+				<option disabled>Select a category</option>
+				<option selected value="0">All Category</option>
+				@foreach (var cat in ViewBag.Categories)
+				{
+					if (cat.CategoryId == ViewBag.selectedCategoryId)
+					{
+						<option selected value="@cat.CategoryId">@cat.CategoryName</option>
+					}
+					else
+					{
+						<option value="@cat.CategoryId">@cat.CategoryName</option>
+					}
+				}
+			</select>
+		</div>
+	</div>
+</div>
+
+<form asp-controller="URL" asp-action="ProcessArticles" method="post">
+	<table class="table mt-3 style=" max-height: 300px; overflow-y: auto;"">
+		<thead>
+			<tr>
+				<th>Select</th>
+				<th>Title</th>
+				<th>URL</th>
+				<th>Category</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var article in Articles)
+			{
+				if (article.isApproved==false)
+				{
+					<tr>
+						<td><input type="checkbox" class="form-check-input" id="@article.ArticleId" name ="selectedArticles" value="@article.ArticleId"></td>
+						<td>@article.Title</td>
+						<td>
+							<a href="@article.URL" target="_blank">
+								@article.URL
+							</a>
+						</td>
+						<td>@article.Category.CategoryName</td>
+					</tr>
+				}
+			}
+		</tbody>
+	</table>
+	<input type="hidden" id="actionType" name="actionType" value="" />
+	<button type="submit" class="btn btn-primary mt-3" onclick="setActionType('Approve')">Approve</button>
+	<button type="submit" class="btn btn-danger mt-3" onclick="setActionType('Reject')">Reject</button>
+</form>
+
+<script>
+	function handleCategoryChange() {
+		const select = document.getElementById('categorySelect');
+		const categoryId = select.value;
+		window.location.href = `/URL/ShowNotApprovedArticles?categoryId=${categoryId}`;
+	}
+	function setActionType(action) {
+		document.getElementById('actionType').value = action;
+	}
+</script>
+

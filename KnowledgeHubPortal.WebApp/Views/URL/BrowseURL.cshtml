@@ -1,0 +1,26 @@
+﻿@model List<KnowledgeHubPortal.Domain.Entities.Article>
+<table class="table mt-3">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>URL</th>
+			<th>Description</th>
+			<th>PostedBy</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var article in model)
+		{
+			if (article.isApproved)
+			{
+				<tr>
+					<td>@article.Title</td>
+					<td>@article.URL</td>
+					<td>@article.Description</td>
+					<td>NA</td>
+
+				</tr>
+			}
+		}
+	</tbody>
+</table>

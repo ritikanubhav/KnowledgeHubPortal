@@ -1,0 +1,33 @@
+﻿@model KnowledgeHubPortal.Domain.Entities.Category
+
+<div class="container mt-5">
+    <h2 class="mb-4">Edit Category</h2>
+    <form asp-action="Edit" asp-controller="Categories" method="post">
+        
+        <span asp-validation-summary="ModelOnly"></span>
+        @Html.ValidationSummary()
+        <div class="form-group mt-3">
+            <input type="hidden" asp-for="CategoryId" value="@Model.CategoryId"/>@* Hidden Field of Primary Key for Update to work *@
+            <label for="categoryName">Category Name</label>
+            <input type="text" class="form-control mt-3" id="categoryName" asp-for="CategoryName" value="@Model.CategoryName" placeholder="Enter category name">
+            <span asp-validation-for="CategoryName" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-3">
+            <label for="categoryDescription">Description</label>
+            <textarea class="form-control mt-3" id="categoryDescription" rows="3" asp-for="CategoryDescription" value="@Model.CategoryDescription" placeholder="Enter category description"></textarea>
+            <span asp-validation-for="CategoryDescription" class="text-danger"></span>
+        </div>
+
+        <button type="Submit" class="btn btn-primary mt-3" asp-action="Edit" asp-controller="Categories" >Edit</button>
+        <button class="btn btn-danger mt-3" asp-action="Cancel" asp-controller="Categories">Cancel</button>
+    </form>
+</div>
+
+@* add scripts in the script section on end of file *@
+@section Scripts
+{
+    @* Include these files from lib folder in the same order *@
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@ @* already in layout *@
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
