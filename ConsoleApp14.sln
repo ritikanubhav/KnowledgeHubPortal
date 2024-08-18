@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp14", "ConsoleApp14\ConsoleApp14.csproj", "{522FCFF1-B350-4F5D-BB7D-6F4EF0F9AEC0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Knowledge Hub Portal", "Knowledge Hub Portal", "{9D981EE7-E73D-4483-A132-41DE1A3AD853}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Layer", "Data Layer", "{8F6EAF42-73A1-46D1-BD4B-433E81C8B7E9}"
@@ -27,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{522FCFF1-B350-4F5D-BB7D-6F4EF0F9AEC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{522FCFF1-B350-4F5D-BB7D-6F4EF0F9AEC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{522FCFF1-B350-4F5D-BB7D-6F4EF0F9AEC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{522FCFF1-B350-4F5D-BB7D-6F4EF0F9AEC0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A9E53CB-DF23-4281-9020-3AC63D8CFAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A9E53CB-DF23-4281-9020-3AC63D8CFAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A9E53CB-DF23-4281-9020-3AC63D8CFAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
