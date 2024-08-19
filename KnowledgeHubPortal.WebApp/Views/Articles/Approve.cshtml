@@ -1,0 +1,42 @@
+﻿@model IEnumerable<KnowledgeHubPortal.Domain.Entities.Article>
+
+<h1>Review Articles</h1>
+<form asp-action="Approve" asp-controller="Articles" method="get">
+    Select Category:
+    <select name="cid" asp-items="ViewBag.Categories"></select>
+    <input type="submit" name="btnSearch" value="Search"/>
+</form>
+<form method="post">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Select</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Submitted At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+
+                var timeDiff = DateTime.Now.Hour - item.DateSubmitted.Hour;
+                <tr>
+                    <td>
+                        <input type="checkbox" value="@item.ArticleId" id="select" name="ids">
+                    </td>
+                    <td>
+                        <a href="@item.ArticleUrl">@item.Title</a>
+                    </td>
+                    <td>
+                        @item.Category.CategoryName
+                    </td>
+                    <td>
+                        @timeDiff hours ago
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+<input class="btn btn-primary" formaction="/Articles/Approve" type="submit" name="approve" value="Approve"/>
+    <input class="btn btn-danger" formaction="/Articles/Reject"  type="submit" name="reject" value="Reject" />
+</form>

@@ -1,0 +1,42 @@
+﻿@model KnowledgeHubPortal.Domain.Entities.Article
+
+@{
+    ViewData["Title"] = "Submit";
+}
+
+<h1>Submit Your Article</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Submit" asp-controller="Articles">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArticleUrl" class="control-label"></label>
+                <input asp-for="ArticleUrl" class="form-control" />
+                <span asp-validation-for="ArticleUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                Select A category:
+               <select asp-for=CategoryId asp-items="ViewBag.Categories"></select>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

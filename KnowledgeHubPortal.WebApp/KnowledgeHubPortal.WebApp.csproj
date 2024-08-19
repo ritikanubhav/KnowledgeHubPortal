@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,11 +31,10 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\URL\BrowseURL.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\URL\Submit.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\URL\Submit.cshtml" />
+    <Folder Include="Views\URL\" />
   </ItemGroup>
 
 </Project>

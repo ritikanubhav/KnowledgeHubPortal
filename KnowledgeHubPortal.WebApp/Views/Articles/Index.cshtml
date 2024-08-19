@@ -1,0 +1,65 @@
+﻿@model IEnumerable<KnowledgeHubPortal.Domain.Entities.Article>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@TempData["Message"]
+
+ @* <div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <strong>@TempData["Message"]</strong> 
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div> *@
+
+<h1>Articles</h1>
+@* <select class="form-select" name="select" id="Select">
+    <option disabled selected>Select Category</option>
+    @foreach (var cat in ViewBag.Categories as List<KnowledgeHubPortal.Domain.Entities.Category>)
+    {
+        <option value="@cat.CategoryId">@cat.CategoryName</option>
+    }
+   
+</select> *@
+@* @Html.DropDownList("Categories") *@
+<form asp-action="Index" asp-controller="Articles" method="post">
+    <h3>Select Category</h3>
+    <select name="cid" asp-items="ViewBag.Categories"></select>
+    <input type="submit" name="btnSearch" value="Search"/>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+               Submitted By
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a href="@item.ArticleUrl" target="_blank">@item.Title</a>
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @item.SubmittedBy
+            </td>
+             @* <td>
+                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+             </td> *@
+        </tr>
+}
+    </tbody>
+</table>

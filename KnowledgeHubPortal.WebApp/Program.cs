@@ -25,7 +25,12 @@ namespace KnowledgeHubPortal.WebApp
             //telling to create object of categoryRepo where Icategoryrrepo is there
             builder.Services.AddTransient<ICategoryRepository,CategoryRepository>();
 			//builder.Services.AddTransient<ICategoryRepository,MockCategoryRepo>();
-			builder.Services.AddTransient<IArticleRepo, ArticleRepo>();
+			builder.Services.AddTransient<IArticlesRepository, ArticlesRepository>();
+
+            //AddTransient
+            //AddScoped
+            //AddSingleton
+            
 
 			var app = builder.Build();
 

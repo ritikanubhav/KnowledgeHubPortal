@@ -15,17 +15,20 @@ namespace KnowledgeHubPortal.Domain.Entities
 		[Required]
 		public int ArticleId {  get; set; }
 		[Required(ErrorMessage ="Please enter Title")]
+		[MinLength(6)]
+		[MaxLength(100)]
         public string Title { get; set; }
 		[Required(ErrorMessage = "Please enter description")]
+		[MaxLength (500)]
 		public string Description { get; set; }
 		[Required(ErrorMessage = "Please enter url")]
 		[Url(ErrorMessage ="Not a Valid URl")]
-		public string URL { get; set; }
-        public bool isApproved { get; set; } = false;
-		[Required(ErrorMessage ="Category is Required")]
+		public string ArticleUrl {  get; set; }
         public int CategoryId {  get; set; }
-		[ForeignKey("CategoryId")]
 		public Category? Category { get; set; }
-		
-    }
+		public bool IsApproved { get; set; }
+		public string? SubmittedBy {  get; set; }
+		public DateTime DateSubmitted { get; set; }
+
+	}
 }
