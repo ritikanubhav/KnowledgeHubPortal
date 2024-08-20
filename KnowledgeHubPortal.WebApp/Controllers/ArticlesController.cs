@@ -1,6 +1,7 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using KnowledgeHubPortal.Domain.Entities;
 using KnowledgeHubPortal.Domain.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -35,6 +36,7 @@ namespace KnowledgeHubPortal.WebApp.Controllers
 			return View(articlesToBrowse); //sending articlesData as model
 		}
 		[HttpGet]
+		[Authorize]
 		public IActionResult Submit()
 		{
 			var categories = from cat in cRepo.GetAll()
@@ -47,6 +49,7 @@ namespace KnowledgeHubPortal.WebApp.Controllers
 			return View();
 		}
 		[HttpPost]
+		[Authorize]
 		public IActionResult Submit(Article article)
 		{
 			//validate 
@@ -67,6 +70,7 @@ namespace KnowledgeHubPortal.WebApp.Controllers
 			return RedirectToAction("Index");
 		}
 		[HttpGet]
+		[Authorize(Roles ="admin")]
 		public IActionResult Approve(int cid=0)
 		{
 			var articlesToReview = aRepo.GetArticlesForReview(cid);
@@ -80,14 +84,19 @@ namespace KnowledgeHubPortal.WebApp.Controllers
             return View(articlesToReview);
 		}
 		[HttpPost]
-		public IActionResult Approve(List<int> ids)
+        [Authorize(Roles = "admin")]
+
+        public IActionResult Approve(List<int> ids)
 		{
 			aRepo.Approve(ids);
+			TempData["Message"] = $"{ids.Count} Aricles Approved";
 			return RedirectToAction("Approve");
         }
+        [Authorize(Roles = "admin")]
         public IActionResult Reject(List<int> ids)
         {
             aRepo.Reject(ids);
+            TempData["Message"] = $"{ids.Count} Aricles Rejected";
             return RedirectToAction("Approve");
         }
     }

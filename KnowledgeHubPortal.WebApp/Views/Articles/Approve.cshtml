@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<KnowledgeHubPortal.Domain.Entities.Article>
 
+@TempData["Message"]
 <h1>Review Articles</h1>
 <form asp-action="Approve" asp-controller="Articles" method="get">
     Select Category:

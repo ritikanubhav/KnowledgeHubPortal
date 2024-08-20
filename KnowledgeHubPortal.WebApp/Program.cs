@@ -14,17 +14,23 @@ namespace KnowledgeHubPortal.WebApp
 
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            //adding own dbcontext
+            builder.Services.AddDbContext<KHPDbContext>(options =>
+               options.UseSqlServer(connectionString));
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddControllersWithViews();
 
             //telling to create object of categoryRepo where Icategoryrrepo is there
             builder.Services.AddTransient<ICategoryRepository,CategoryRepository>();
-			//builder.Services.AddTransient<ICategoryRepository,MockCategoryRepo>();
 			builder.Services.AddTransient<IArticlesRepository, ArticlesRepository>();
 
             //AddTransient
@@ -47,7 +53,7 @@ namespace KnowledgeHubPortal.WebApp
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();//allow access of static files in wwwroot folder
+            app.UseStaticFiles();//allows access of static files in wwwroot folder
 
             app.UseRouting();
 

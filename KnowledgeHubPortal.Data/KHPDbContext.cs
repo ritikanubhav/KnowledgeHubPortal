@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KnowledgeHubPortal.Data
 {
-    internal class KHPDbContext:DbContext //this context object must not be accessible outside DAL
+    public class KHPDbContext:DbContext //this context object must not be accessible outside DAL but web app needs it
     {
-        //map to db
+        //1. map to db
         public KHPDbContext() { }
         public KHPDbContext(DbContextOptions<KHPDbContext>options):base(options)
         {
@@ -18,12 +18,13 @@ namespace KnowledgeHubPortal.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //if configured already dont configure
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=KHPDb2024;Integrated Security=True;Encrypt=True");
             }
         }
-        //map to tables
+        //2. map to tables
         public DbSet<Category> Categories { get; set; }
         public DbSet<Article> Articles { get; set; }
     }

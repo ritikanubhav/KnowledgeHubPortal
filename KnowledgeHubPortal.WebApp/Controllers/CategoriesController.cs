@@ -1,10 +1,13 @@
 ﻿using KnowledgeHubPortal.Data;
 using KnowledgeHubPortal.Domain.Entities;
 using KnowledgeHubPortal.Domain.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KnowledgeHubPortal.WebApp.Controllers
 {
+    [Authorize(Roles="admin")]
+
     public class CategoriesController : Controller
     {
 		//Url: .../categories/index
@@ -16,6 +19,7 @@ namespace KnowledgeHubPortal.WebApp.Controllers
         {
             categoryRepository = repo;
         }
+        // [AllowAnonymous] // if i want to be acccessible by all
         public IActionResult Index()
         {
             //step 1: fetch the category list from data layer

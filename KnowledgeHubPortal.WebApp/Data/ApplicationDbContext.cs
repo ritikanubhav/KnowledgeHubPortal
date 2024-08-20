@@ -8,6 +8,7 @@ namespace KnowledgeHubPortal.WebApp.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
     }
 }

@@ -25,18 +25,35 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Manage Category</a>
-                        </li>
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Manage Category</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Index">Browse Articles</a>
                         </li>
+
+                        @if (User.Identity.IsAuthenticated )
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Submit">Submit Article</a>
+                            </li>
+                        }
+            
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                        {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Submit">Submit Article</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Approve">Review Article</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Approve">Approve Article</a>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">List Users</a>
                         </li>
+                            
+                        }
 
                     </ul>
                     <partial name="_LoginPartial" />
